@@ -10,12 +10,14 @@ const GET_URL = "v2/kumpulandoa";
 function App() {
   const [data, setData] = useState([]);
   const reload = () => window.location.reload();
+  // modal
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
   const [show1, setShow1] = useState(false);
   const handleShow1 = () => setShow1(true);
   const handleClose1 = () => setShow1(false);
+  // state untuk post dan put
   const [nama, setNama] = useState("");
   const [namaNew, setNamaNew] = useState('');
   const [ayat, setAyat] = useState("");
@@ -26,11 +28,12 @@ function App() {
   const [terjemahNew, setTerjemahNew] = useState('');
   const [ide, setIde] = useState(JSON.parse(localStorage.getItem("idAyat")));
 
-
+// untuk mengambil data
   useEffect(() => {
     fetchData();
   });
 
+  // consume API menggunakan axios method get
   const fetchData = async() => {
     axios({
       method:"get",
@@ -40,6 +43,7 @@ function App() {
     })
   };
 
+  // consume API menggunakan axios dengan method POST untuk menambahkan data
   const handleTambah = async(e) => {
     e.preventDefault();
     axios({
@@ -60,7 +64,7 @@ function App() {
       }
     })
   }
-
+// consume API menggunakan axios dengan method PUT untuk mengedit data
   const handleEdit = async(e) => {
     e.preventDefault();
     axios({
@@ -80,7 +84,9 @@ function App() {
     })
   }
 
+//function untuk melooping dari get data 
   function loopData(doa, ayat, latin, artinya, id) {
+    // handleDelete dengan consume API method DELETE
     async function handleDelete() {
       axios({
         method: 'delete',
@@ -126,7 +132,7 @@ function App() {
               <Icon icon="fluent:delete-12-filled" width={"25px" } color="red" />
             </Button>
             <Button id={id} className="bg-white border-0" onClick={(e) => {
-                  localStorage.setItem("idAyat", id);
+                  localStorage.setItem("idAyat", id); //membuat localStorage id untuk dijadikan parameter edit
                   handleEdit();
                 }}>
               <Icon icon="mi:edit-alt" width={"25px" } color="#24AADF" />
@@ -149,6 +155,7 @@ function App() {
             </Button>
           </div>
         </div>
+        {/* looping dari data GET menggunakan map */}
         {data.map(function(value) {
           return loopData(value.doa, value.ayat, value.latin, value.artinya, value.id)
         })}
@@ -229,7 +236,7 @@ function App() {
             <div className="row mb-5" style={{ marginTop: "70px" }}>
               <div className="col  d-flex justify-content-end">
                 <Button
-                  className="text-center ms-3 p-2 btn-darkLight fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
+                  className="text-center ms-3 p-2 px-3 btn-darkLight fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
                   style={{ height: "40px" }}
                   type="button"
                   onClick={handleClose1}
@@ -239,13 +246,13 @@ function App() {
                   </span>
                 </Button>{" "}
                 <Button
-                  className="text-center ms-3 p-2 btn-green fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
+                  className="text-center ms-3 p-2 px-3 btn-green fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
                   style={{ height: "40px" }}
                   type="submit"
                 >
                   <Icon icon="mingcute:save-fill" width="16px" height="16px" />
                   <span className="fs-8 ms-1 d-none d-sm-inline">
-                    <b>EDIT DATA</b>
+                    <b>TAMBAH DATA</b>
                   </span>
                 </Button>
               </div>
@@ -328,7 +335,7 @@ function App() {
             <div className="row mb-5" style={{ marginTop: "70px" }}>
               <div className="col  d-flex justify-content-end">
                 <Button
-                  className="text-center ms-3 p-2 btn-darkLight fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
+                  className="text-center ms-3 p-2 px-3 btn-darkLight fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
                   style={{ height: "40px" }}
                   type="button"
                   onClick={handleClose}
@@ -338,7 +345,7 @@ function App() {
                   </span>
                 </Button>{" "}
                 <Button
-                  className="text-center ms-3 p-2 btn-green fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
+                  className="text-center ms-3 px-3 p-2 btn-green fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
                   style={{ height: "40px" }}
                   type="submit"
                 >
