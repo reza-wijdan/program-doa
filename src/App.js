@@ -122,12 +122,13 @@ function App() {
       getId()
     };
     return (
-      <div className="px-5">
-        <p className="text-center fs-4"><b>{doa}</b></p>
-        <p className="text-end fs-4">{ayat}</p>
+      <div className="doa-items text-center p-3 my-3">
+        <p className="fs-4"><b>{doa}</b></p>
+        <hr/>
+        <p className="fs-4">{ayat}</p>
         <p>{latin}</p>
         <p style={{ marginTop: "-10px" }}>{artinya}</p>
-        <div className="d-flex" style={{ marginLeft:"-10px" }}>
+        <div className="d-flex me-3" style={{ justifyContent:'end' }}>
             <Button id={id} className="bg-white border-0" type="button" onClick={handleDelete}>
               <Icon icon="fluent:delete-12-filled" width={"25px" } color="red" />
             </Button>
@@ -138,23 +139,20 @@ function App() {
               <Icon icon="mi:edit-alt" width={"25px" } color="#24AADF" />
             </Button>
         </div>
-        <hr></hr>
       </div>
     );
   } 
   return (
-    <>
+    <div className="container bg-add p-5">
       <div className="row mt-2">
-        <p className="fs-2 text-center">
-          <b>Kumpulan Doa - Doa</b>
-        </p>
-        <div className="row">
-          <div className="col d-flex justify-content-end">
-            <Button className="btn" onClick={handleShow1}>
+        <div className="d-flex">
+          <p className="fs-2">
+            <b>Kumpulan Doa - Doa</b>
+          </p>
+            <Button className="btn btn-add ms-auto p-3" onClick={handleShow1}>
               <p className="m-0 p-0">TAMBAH DOA</p>
             </Button>
           </div>
-        </div>
         {/* looping dari data GET menggunakan map */}
         {data.map(function(value) {
           return loopData(value.doa, value.ayat, value.latin, value.artinya, value.id)
@@ -246,7 +244,7 @@ function App() {
                   </span>
                 </Button>{" "}
                 <Button
-                  className="text-center ms-3 p-2 px-3 btn-green fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
+                  className="text-center ms-3 p-2 px-3 btn-success fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
                   style={{ height: "40px" }}
                   type="submit"
                 >
@@ -345,13 +343,13 @@ function App() {
                   </span>
                 </Button>{" "}
                 <Button
-                  className="text-center ms-3 px-3 p-2 btn-green fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
+                  className="text-center ms-3 px-3 p-2 btn-success fs-8 border-0 pt-6 shadow-sm rounded-5 w-26"
                   style={{ height: "40px" }}
                   type="submit"
                 >
                   <Icon icon="mingcute:save-fill" width="16px" height="16px" />
                   <span className="fs-8 ms-1 d-none d-sm-inline">
-                    <b>EDIT DATA</b>
+                    <b>SIMPAN</b>
                   </span>
                 </Button>
               </div>
@@ -360,7 +358,7 @@ function App() {
         </Modal.Body>
       </Modal>
       
-    </>
+    </div>
   );
 }
 
